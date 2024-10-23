@@ -1,0 +1,28 @@
+<html>
+  <body>
+    <h1>Add contact</h1>
+    <form method="POST" action="/">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" />
+      <label for="phone">Phone</label>
+      <input type="text" name="phone" id="phone" />
+      <input type="submit" value="Add" />
+    </form>
+
+    <h1>Contacts</h1>
+    {% for contact in contacts %}
+    <p>{{ contact.name }} - {{ contact.phone }}</p>
+    <form method="POST" action="/update">
+      <input type="hidden" value="{{ contact.name }}" name="oldname" />
+      <input type="text" value="{{ contact.name }}" name="newname" />
+      <input type="hidden" value="{{ contact.phone }}" name="oldphone" />
+      <input type="text" value="{{ contact.phone }}" name="newphone" />
+      <input type="submit" value="Update" />
+    </form>
+    <form method="POST" action="/delete">
+      <input type="hidden" value="{{ contact.name }}" name="name" />
+      <input type="submit" value="Delete" />
+    </form>
+    {% endfor %}
+  </body>
+</html>
